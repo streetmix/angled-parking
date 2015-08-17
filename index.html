@@ -3,6 +3,7 @@
   <meta charset='UTF-8'>
   <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'>
   <title>Streetmix - angled parking test</title>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
   <style>
     html, body {
@@ -46,6 +47,7 @@
   var camera
   var renderer
   var controls
+  var animation
 
   function init () {
     scene = new THREE.Scene()
@@ -81,6 +83,8 @@
 
     container.appendChild(renderer.domElement)
 
+    document.addEventListener('mousedown', onMouseDown, false)
+    document.addEventListener('mouseup', onMouseUp, false)
     window.addEventListener('resize', onWindowResize, false)
   }
 
@@ -96,11 +100,20 @@
     renderer.setSize(WIDTH, HEIGHT)
   }
 
+  function onMouseDown () {
+    loop()
+  }
+
+  function onMouseUp () {
+    endloop()
+  }
+
   function addOrbitControls () {
     // Orbit controls
     controls = new THREE.OrbitControls(camera, renderer.domElement)
     controls.noZoom = true
     controls.noPan = true
+    controls.rotateSpeed = 2.0
 
     // Lock to horizontal view
     controls.minPolarAngle = Math.PI / 2
@@ -120,12 +133,18 @@
       collada.scale.x = collada.scale.y = collada.scale.z = 1
       collada.updateMatrix()
       scene.add(collada)
+      render()
     })
   }
 
   function loop () {
     render()
-    requestAnimationFrame(loop)
+    animation = window.requestAnimationFrame(loop)
+  }
+
+  function endloop () {
+    render()
+    window.cancelAnimationFrame(animation)
   }
 
   function render () {
@@ -134,10 +153,10 @@
   }
 
   init()
-  addOrbitControls()
-  addLights()
   addCar()
-  loop()
+  addLights()
+  addOrbitControls()
+  render()
 </script>
 
 </body>
