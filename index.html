@@ -96,9 +96,34 @@
     }
 
     #controls {
-      position: absolute;
-      top: 20px;
-      left: 20px;
+      margin-top: 10px;
+    }
+
+    input {
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      appearance: none;
+      background: #f1f7f9;
+      border: 1px solid #95b4c1;
+      resize: none;
+      padding: 5px;
+    }
+
+    button {
+      outline: none;
+      border: 0;
+      border-top: 1px solid #95b4c1;
+      border-bottom: 1px solid #95b4c1;
+      padding: 5px 10px;
+      background-color: #e6f0f5;
+      color: black;
+      text-align: center;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    #angle {
+      width: 40px;
     }
 
   </style>
@@ -107,11 +132,13 @@
 
 <div id="view"></div>
 <div id="loader" class="loader"></div>
-<div id="controls">
-  <input id="angle" type="text">
-  <button id="screenshot">save image</button>
+<div id="howto">
+  Drag left or right
+  <div id="controls">
+    <input id="angle" type="text">
+    <button id="screenshot">save image</button>
+  </div>
 </div>
-<div id="howto">Drag left or right</div>
 
 <script src="js/three.min.js"></script>
 <script src="js/ColladaLoader.js"></script>
