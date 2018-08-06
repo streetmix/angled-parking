@@ -158,6 +158,7 @@
   var animation
   var angleInput = document.getElementById('angle')
   var Z_CLIPPING_PLANE = 300
+  var MODEL_SCALE = 2
 
   function init () {
     scene = new THREE.Scene()
@@ -256,7 +257,7 @@
     loader.options.convertUpAxis = true
     loader.load('data/car.dae', function (result) {
       var collada = result.scene
-      collada.scale.x = collada.scale.y = collada.scale.z = 1
+      collada.scale.x = collada.scale.y = collada.scale.z = MODEL_SCALE
       collada.updateMatrix()
       scene.add(collada)
       document.getElementById('loader').style.display = 'none'
